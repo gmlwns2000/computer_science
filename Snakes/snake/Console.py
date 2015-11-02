@@ -11,4 +11,3 @@ import sys
 
 def Write(msg):
     sys.stdout.write(msg)
-    #sys.stdout.flush()
