@@ -11,16 +11,13 @@ import os
 import time
 from time import localtime, strftime
 
-debug=True
-
 def Set(debug_mode):
     global debug
     if debug_mode:
-        debug=False
-    else:
         debug=True
+    else:
+        debug=False
 def Log(msg):
     global debug
     if(debug):
         print("["+strftime("%B %dth %A %I:%M", localtime())+"] "+msg)
-        time.sleep(0.5)
