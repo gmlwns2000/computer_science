@@ -11,3 +11,6 @@ import sys
 
 def Write(msg):
     sys.stdout.write(msg)
+
+def Read():
+    return input()[0]
