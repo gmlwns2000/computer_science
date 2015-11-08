@@ -9,9 +9,11 @@ Copyright (c) 2015 AinL. All rights reserved.
 
 import os
 import time
+import sys
 from snake import Debug
 from snake import Console
 from snake import Getch
+import random
 import threading
 
 def cls():
@@ -19,7 +21,7 @@ def cls():
 
 cls()
 
-Debug.Set(True)
+Debug.Set(False)
 
 global draw_pause_length
 draw_pause_length=0
@@ -46,6 +48,42 @@ keydown=False
 global build_num
 global nowframe
 nowframe=0
+global scr_width
+scr_width=86
+global scr_height
+scr_height=24
+global search_x
+search_x=0
+global search_y
+search_y=0
+global game_score
+game_score=0
+global game_freq
+game_freq=0.07
+global game_on
+game_on=True
+global snake_x
+global snake_y
+global direction
+snake_x=17
+snake_y=6
+direction=4
+global game_feeded
+game_feeded=0
+global move_count
+move_count=0
+
+try:
+    scr_width = int(sys.argv[1])
+    scr_height = int(sys.argv[2])
+except:
+    scr_width=76
+    scr_height=21
+
+if scr_width<30:
+    scr_width=30
+if scr_height<12:
+    scr_height=12
 
 Debug.Log("Update Buildnum...")
 
@@ -68,13 +106,20 @@ except:
 
 Debug.Log("Start Define Functions...")
 
+def game_exit():
+    global game_on
+    game_on=False
+    time.sleep(0.2)
+    exit()
 
 def room_goto(room_id):
     global room
     room=room_id
 
 def scr_draw(buf_scr, width, height):
-    print("==============================")
+    global scr_width
+    global scr_height
+    print("="*(scr_width+2))
     line=0
     while line<height:
         Console.Write("=")
@@ -85,11 +130,19 @@ def scr_draw(buf_scr, width, height):
             pos=pos+1
         print("=")
         line=line+1
-    print("==============================")    
+    print("="*(scr_width+2))
+
+def draw_getpixel(x,y):
+    global buf_scr
+    try:
+        return buf_scr[y][x]
+    except:
+        return " "
 
 def draw_pixel(x,y,char):
     try:
-         buf_scr[y][x]=char
+        global buf_scr
+        buf_scr[y][x]=char
     except:
         pass
 
@@ -128,8 +181,9 @@ def read_key():
     global game_continue
     global keyinput
     global game_drawing
+    global game_on
     keyinput="1"
-    while True:
+    while game_on:
         if game_drawing==False:
             if room==room_game:
                 keyinput=Console.Read()
@@ -145,6 +199,8 @@ def Debuger():
     global nowframe
     global snake_x
     global snake_y
+    global search_x
+    global search_y
     global direction
     
     Debug.Log("Debuger: Build: #"+str(build_num))
@@ -157,28 +213,24 @@ def Debuger():
     Debug.Log("Debuger: keydown: "+str(keydown))
     Debug.Log("Debuger: snake_x: "+str(snake_x))
     Debug.Log("Debuger: snake_y: "+str(snake_y))
+    Debug.Log("Debuger: search_x: "+str(search_x))
+    Debug.Log("Debuger: search_y: "+str(search_y))
     Debug.Log("Debuger: direction: "+str(direction))
 
 def room1():
     global room
     global keyinput
+    global scr_width
+    global scr_height
     while (room == 1):
         Debug.Log("Title: Main Room")
         Debuger()
-        print("==============================")
-        print("=                            =")
-        print("=                            =")
-        print("=                            =")
-        print("=                            =")
-        print("=      ~ S N A K E S ~       =")
-        print("=                            =")
-        print("=                            =")
-        print("=     ┌─┐          ┌─┐       =")
-        print("=     │y│          │n│       =")
-        print("=     └─┘          └─┘       =")
-        print("=  continue        exit      =")
-        print("=                            =")
-        print("==============================")
+        scr_clear(scr_width,scr_height)
+        draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
+        draw_font(int(scr_width/2-13),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
+        draw_font(int(scr_width/2-9),int(scr_height*0.75),"Enter y to Continue")
+        draw_font(int(scr_width/2-8),int(scr_height*0.75)+1,"Enter n to Exit")
+        scr_draw(buf_scr,scr_width,scr_height)
         y="y"
         n="n"
         inp=str(input("CMD>"))
@@ -187,81 +239,255 @@ def room1():
             if inp=="y":
                 room_goto(room_game)
                 Debug.Log("goto game : "+str(room))
-                scr_clear(28,12)
+                scr_clear(scr_width,scr_height)
                 th = threading.Thread(target=read_key, args=())
                 th.start()
                 time.sleep(0)
             elif inp=="n":
                 cls()
-                scr_clear(28,12)
+                scr_clear(scr_width,scr_height)
                 print("exit")
-                exit()
+                game_exit()
         except:
             cls()
             continue
 
-global snake_x
-global snake_y
-global direction
-snake_x=16
-snake_y=6
-direction=4
+def draw_game_restartmsg():
+    draw_font(int(scr_width/2-5),int(scr_height/2)-1,"You LOOSE")
+    draw_font(int(scr_width/2-9),int(scr_height/2),"press y to continue")
+    draw_font(int(scr_width/2-7),int(scr_height/2)+1,"press n to exit")
+
+def draw_game_ready():
+    global snake_x
+    global snake_y
+    draw_font(int(scr_width*0.5)-4,int(scr_height*0.5)-3,"Ready...")
+    draw_font(int(scr_width*0.5)-2,int(scr_height*0.5),"#####")
+    draw_font(int(scr_width*0.83),int(scr_height*0.76),"*")
+    snake_x=int(scr_width*0.5)+2
+    snake_y=int(scr_height*0.5)
+
+def snake_tail():
+    global snake_x
+    global snake_y
+    global search_x
+    global search_y
+    global game_status
+    global scr_width
+    global scr_height
+    if not(draw_getpixel(snake_x,snake_y)=="#"):
+        game_exit()
+        return ""
+    if draw_getpixel(snake_x+1,snake_y)=="#":
+        search_x=snake_x+1
+        search_y=snake_y
+    elif draw_getpixel(snake_x-1,snake_y)=="#":
+        search_x=snake_x-1
+        search_y=snake_y
+    elif draw_getpixel(snake_x,snake_y+1)=="#":
+        search_x=snake_x
+        search_y=snake_y+1
+    elif draw_getpixel(snake_x,snake_y-1)=="#":
+        search_x=snake_x
+        search_y=snake_y-1
+    pre_x=snake_x
+    pre_y=snake_y
+    find=True
+    count=0
+    while find:
+        count+=1
+        if count>scr_width*scr_height:
+            game_status=4
+            scr_clear(scr_width,scr_height)
+            draw_game_restartmsg()
+            return "oh"
+        findd=True
+        if draw_getpixel(search_x-1,search_y)=="#":
+            if not(search_x-1==pre_x):
+                findd=False
+                pre_x=search_x
+                search_x=search_x-1
+                pre_y=search_y
+                search_y=search_y
+        if draw_getpixel(search_x+1,search_y)=="#":
+            if not(search_x+1==pre_x):
+                findd=False
+                pre_x=search_x
+                search_x=search_x+1
+                pre_y=search_y
+                search_y=search_y
+        if draw_getpixel(search_x,search_y+1)=="#":
+            if not(search_y+1==pre_y):
+                findd=False
+                pre_x=search_x
+                search_x=search_x
+                pre_y=search_y
+                search_y=search_y+1
+        if draw_getpixel(search_x,search_y-1)=="#":
+            if not(search_y-1==pre_y):
+                findd=False
+                pre_x=search_x
+                search_x=search_x
+                pre_y=search_y
+                search_y=search_y-1
+        if findd:
+            find=False
+    draw_pixel(search_x,search_y," ")
+
+def snake_feed():
+    global scr_width
+    global scr_height
+    global game_score
+    global game_feeded
+    global move_count
+    game_feeded+=1
+    game_score+=int(100*(game_feeded+1.23)/(move_count+0.48))
+    move_count=0
+    feed_x=random.randint(2,scr_width-5)
+    feed_y=random.randint(2,scr_height-5)
+    feeded=True
+    while feeded:
+        if draw_getpixel(feed_x,feed_y)=="#":
+            feed_x=random.randint(2,scr_width-5)
+            feed_y=random.randint(2,scr_height-5)
+        else:
+            feeded=False
+            draw_pixel(feed_x,feed_y,"*")
 
 def snake_update():
     global snake_x
     global snake_y
+    global scr_width
+    global scr_height
     global direction
-
+    global game_status
+    global game_countinue
+    global game_score
+    if direction==1:
+        if snake_y>0 and not(draw_getpixel(snake_x,snake_y-1)=="#"):
+            snake_y-=1
+            if draw_getpixel(snake_x,snake_y)=="*":
+                draw_pixel(snake_x,snake_y,"#")
+                snake_feed()
+            else:
+                draw_pixel(snake_x,snake_y,"#")
+                snake_tail()
+        else:
+            game_status=4
+            scr_clear(scr_width,scr_height)
+            draw_game_restartmsg()
+    elif direction==2:
+        if snake_x>0 and not(draw_getpixel(snake_x-1,snake_y)=="#"):
+            snake_x-=1
+            if draw_getpixel(snake_x,snake_y)=="*":
+                draw_pixel(snake_x,snake_y,"#")
+                snake_feed()
+            else:
+                draw_pixel(snake_x,snake_y,"#")
+                snake_tail()
+        else:
+            game_status=4
+            scr_clear(scr_width,scr_height)
+            draw_game_restartmsg()
+    elif direction==3:
+        if snake_y<scr_height-1 and not(draw_getpixel(snake_x,snake_y+1)=="#"):
+            snake_y+=1
+            if draw_getpixel(snake_x,snake_y)=="*":
+                draw_pixel(snake_x,snake_y,"#")
+                snake_feed()
+            else:
+                draw_pixel(snake_x,snake_y,"#")
+                snake_tail()
+        else:
+            game_status=4
+            scr_clear(scr_width,scr_height)
+            draw_game_restartmsg()
+    elif direction==4:
+        if snake_x<scr_width-1 and not(draw_getpixel(snake_x+1,snake_y)=="#"):
+            snake_x+=1
+            if draw_getpixel(snake_x,snake_y)=="*":
+                draw_pixel(snake_x,snake_y,"#")
+                snake_feed()
+            else:
+                draw_pixel(snake_x,snake_y,"#")
+                snake_tail()
+        else:
+            game_status=4
+            scr_clear(scr_width,scr_height)
+            draw_game_restartmsg()
 def room2():
     #STEP
     global buf_scr
     global game_status
     global game_drawing
+    global game_freq
     global keyinput
     global draw_pause_length
     global nowframe
     global snake_x
     global snake_y
+    global scr_width
+    global scr_height
     global direction
+    global game_score
+    global game_feeded
+    global move_count
+    global scr_width
+    global scr_height
     
     if game_status==1:
-        draw_font(6,5,"press Space key")
-        draw_font(9,6,"To start")
+        draw_font(int(scr_width/2)-8,int(scr_height/2)-2,"Enter Space key")
+        draw_font(int(scr_width/2)-4,int(scr_height/2)+2,"To start")
+        draw_pause(0.5)
         if keyinput==" ":
-            scr_clear(28,12)
+            scr_clear(scr_width,scr_height)
             game_status=2
-            draw_font(11,5,"Ready...")
-            draw_font(12,6,"#####")
-            snake_x=16
-            snake_y=6
             direction=4
-            draw_font(20,10,"*")
             keyinput=""
+            draw_game_ready()
             draw_pause(1)
     elif game_status==3:
         if keyinput=="w":
             direction=1
             keyinput=""
+            move_count+=1
         elif keyinput=="a":
             direction=2
             keyinput=""
+            move_count+=1
         elif keyinput=="s":
             direction=3
             keyinput=""
+            move_count+=1
         elif keyinput=="d":
             direction=4
             keyinput=""
+            move_count+=1
         snake_update()
-    time.sleep(0.1)
+        if direction==1 or direction==3:
+            draw_pause(game_freq)
+    elif game_status==4:
+        draw_pause(0.5)
+        if keyinput=="n" or keyinput=="N":
+            print("Press Enter To Exit...")
+            game_exit()
+        elif keyinput=="y" or keyinput=="Y":
+            scr_clear(scr_width,scr_height)
+            game_status=2
+            game_score=0
+            game_feeded=0
+            move_count=0
+            direction=4
+            keyinput=""
+            draw_pause(1)
+            draw_game_ready()
     #DRAW
-    game_drawing=True
     cls()
+    scr_draw(buf_scr, scr_width,scr_height)
+    print("Score: "+str(game_score)+" points!")
     Debug.Log("Title: Main Room")
     Debuger()
-    scr_draw(buf_scr, 28, 12)
-    time.sleep(draw_pause_length)
-    game_drawing=False
     #After Draw
+    time.sleep(game_freq+draw_pause_length)
     draw_pause_length=0
     nowframe+=1
     if game_status==2:
@@ -273,6 +499,8 @@ def main():
     global room
     global room_main
     global room_game
+    global scr_width
+    global scr_height
     if room==room_main:
         room1()
     elif room==room_game:

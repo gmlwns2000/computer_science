@@ -13,4 +13,7 @@ def Write(msg):
     sys.stdout.write(msg)
 
 def Read():
-    return input()[0]
+    try:
+        return input()[0]
+    except:
+        return ""
