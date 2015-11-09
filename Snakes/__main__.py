@@ -59,7 +59,7 @@ search_y=0
 global game_score
 game_score=0
 global game_freq
-game_freq=0.07
+game_freq=0.06
 global game_on
 game_on=True
 global snake_x
@@ -87,22 +87,27 @@ if scr_height<12:
 
 Debug.Log("Update Buildnum...")
 
-try:
+if Debug.debug:
+    try:
+        f=open("./.buildnum","r")
+        build_num=int(f.read())
+        build_num+=1
+        f.close()
+        f=open("./.buildnum","w")
+        f.write(str(build_num))
+        f.close()
+        Debug.Log("Loaded Build Number")
+    except:
+        Debug.Log("Can't Find Build Numberfile")
+        fd=open("./.buildnum","w")
+        build_num=1
+        fd.write(str(build_num))
+        fd.close()
+        Debug.Log("Successed Make Build Number File!")
+else:
     f=open("./.buildnum","r")
     build_num=int(f.read())
-    build_num+=1
     f.close()
-    f=open("./.buildnum","w")
-    f.write(str(build_num))
-    f.close()
-    Debug.Log("Loaded Build Number")
-except:
-    Debug.Log("Can't Find Build Numberfile")
-    fd=open("./.buildnum","w")
-    build_num=1
-    fd.write(str(build_num))
-    fd.close()
-    Debug.Log("Successed Make Build Number File!")
 
 Debug.Log("Start Define Functions...")
 
@@ -119,7 +124,8 @@ def room_goto(room_id):
 def scr_draw(buf_scr, width, height):
     global scr_width
     global scr_height
-    print("="*(scr_width+2))
+    cls()
+    Console.Write(""+"="*(scr_width+2)+"\n")
     line=0
     while line<height:
         Console.Write("=")
@@ -128,9 +134,9 @@ def scr_draw(buf_scr, width, height):
         while pos<width:
             Console.Write(line_buf[pos])
             pos=pos+1
-        print("=")
+        Console.Write("=\n")
         line=line+1
-    print("="*(scr_width+2))
+    Console.Write("="*(scr_width+2)+"\n")
 
 def draw_getpixel(x,y):
     global buf_scr
@@ -243,6 +249,7 @@ def room1():
                 th = threading.Thread(target=read_key, args=())
                 th.start()
                 time.sleep(0)
+                cls()
             elif inp=="n":
                 cls()
                 scr_clear(scr_width,scr_height)
@@ -481,7 +488,6 @@ def room2():
             draw_pause(1)
             draw_game_ready()
     #DRAW
-    cls()
     scr_draw(buf_scr, scr_width,scr_height)
     print("Score: "+str(game_score)+" points!")
     Debug.Log("Title: Main Room")
