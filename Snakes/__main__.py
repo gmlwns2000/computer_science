@@ -490,7 +490,7 @@ def room1():
     while (room == 1):
         scr_clear(scr_width,scr_height)
         draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
-        draw_font(int(scr_width/2-15),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
+        draw_font(int(scr_width/2-len("Wellcome to Sanke World!")/2),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
         draw_font(int(scr_width/2-9),int(scr_height*0.75),"Enter y to Continue")
         draw_font(int(scr_width/2-8),int(scr_height*0.75)+1,"Enter n to Exit")
         scr_draw(buf_scr,scr_width,scr_height)
