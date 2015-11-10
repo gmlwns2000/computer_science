@@ -7,6 +7,10 @@ Created by Hee Jun Lee on 2015-10-25.
 Copyright (c) 2015 AinL. All rights reserved.
 """
 
+########################################################
+#                       import
+########################################################
+
 import os
 import time
 import sys
@@ -23,6 +27,12 @@ cls()
 
 Debug.Set(False)
 
+########################################################
+#                         var
+########################################################
+
+global engine_on
+engine_on=True
 global draw_pause_length
 draw_pause_length=0
 global room
@@ -43,6 +53,8 @@ global buf_scr
 buf_scr=[]
 global keyinput
 keyinput=""
+global keyout
+keyout=False
 global keydown
 keydown=False
 global build_num
@@ -70,8 +82,14 @@ snake_y=6
 direction=4
 global game_feeded
 game_feeded=0
+global game_highscore
+game_highscore=0
 global move_count
 move_count=0
+
+########################################################
+#                       INIT
+########################################################
 
 try:
     scr_width = int(sys.argv[1])
@@ -111,32 +129,9 @@ else:
 
 Debug.Log("Start Define Functions...")
 
-def game_exit():
-    global game_on
-    game_on=False
-    time.sleep(0.2)
-    exit()
-
-def room_goto(room_id):
-    global room
-    room=room_id
-
-def scr_draw(buf_scr, width, height):
-    global scr_width
-    global scr_height
-    cls()
-    Console.Write(""+"="*(scr_width+2)+"\n")
-    line=0
-    while line<height:
-        Console.Write("=")
-        pos=0
-        line_buf=buf_scr[line]
-        while pos<width:
-            Console.Write(line_buf[pos])
-            pos=pos+1
-        Console.Write("=\n")
-        line=line+1
-    Console.Write("="*(scr_width+2)+"\n")
+########################################################
+#                   DRAW FUNCTION
+########################################################
 
 def draw_getpixel(x,y):
     global buf_scr
@@ -165,6 +160,27 @@ def draw_pause(length):
     global draw_pause_length
     draw_pause_length+=length
 
+########################################################
+#                   SCREEN FUNCTION
+########################################################
+
+def scr_draw(buf_scr, width, height):
+    global scr_width
+    global scr_height
+    cls()
+    Console.Write(""+"="*(scr_width+2)+"\n")
+    line=0
+    while line<height:
+        Console.Write("=")
+        pos=0
+        line_buf=buf_scr[line]
+        while pos<width:
+            Console.Write(line_buf[pos])
+            pos=pos+1
+        Console.Write("=\n")
+        line=line+1
+    Console.Write("="*(scr_width+2)+"\n")
+
 def scr_clear(width, height):
     global buf_scr
     line=0
@@ -180,19 +196,9 @@ def scr_clear(width, height):
             buf_scr.append(temp_line)
         line=line+1
 
-def read_key():
-    global room
-    global room_main
-    global room_game
-    global game_continue
-    global keyinput
-    global game_drawing
-    global game_on
-    keyinput="1"
-    while game_on:
-        if game_drawing==False:
-            if room==room_game:
-                keyinput=Console.Read()
+########################################################
+#                   DEBUGER FUNCTION
+########################################################
 
 def Debuger():
     global keyinput
@@ -208,6 +214,7 @@ def Debuger():
     global search_x
     global search_y
     global direction
+    global keyout
     
     Debug.Log("Debuger: Build: #"+str(build_num))
     Debug.Log("Debuger: room: "+str(room))
@@ -217,52 +224,102 @@ def Debuger():
     Debug.Log("Debuger: game_status: "+str(game_status))
     Debug.Log("Debuger: keyinput: "+str(keyinput))
     Debug.Log("Debuger: keydown: "+str(keydown))
+    Debug.Log("Debuger: keyout: "+str(keyout))
     Debug.Log("Debuger: snake_x: "+str(snake_x))
     Debug.Log("Debuger: snake_y: "+str(snake_y))
     Debug.Log("Debuger: search_x: "+str(search_x))
     Debug.Log("Debuger: search_y: "+str(search_y))
     Debug.Log("Debuger: direction: "+str(direction))
 
-def room1():
-    global room
-    global keyinput
-    global scr_width
-    global scr_height
-    while (room == 1):
-        Debug.Log("Title: Main Room")
-        Debuger()
-        scr_clear(scr_width,scr_height)
-        draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
-        draw_font(int(scr_width/2-13),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
-        draw_font(int(scr_width/2-9),int(scr_height*0.75),"Enter y to Continue")
-        draw_font(int(scr_width/2-8),int(scr_height*0.75)+1,"Enter n to Exit")
-        scr_draw(buf_scr,scr_width,scr_height)
-        y="y"
-        n="n"
-        inp=str(input("CMD>"))
-        Debug.Log("input: "+inp)
-        try:
-            if inp=="y":
-                room_goto(room_game)
-                Debug.Log("goto game : "+str(room))
-                scr_clear(scr_width,scr_height)
-                th = threading.Thread(target=read_key, args=())
-                th.start()
-                time.sleep(0)
-                cls()
-            elif inp=="n":
-                cls()
-                scr_clear(scr_width,scr_height)
-                print("exit")
-                game_exit()
-        except:
-            cls()
-            continue
+########################################################
+#                   GAME FUNCTION
+########################################################
 
-def draw_game_restartmsg():
+def read_key():
+    global room
+    global room_main
+    global room_game
+    global game_continue
+    global keyinput
+    global game_drawing
+    global game_on
+    global keyout
+    keyinput="1"
+    keyout=False
+    while game_on:
+        if game_drawing==False:
+            if room==room_game:
+                keyinput=Console.Read()
+    keyout=True
+
+def game_exit():
+    global game_on
+    global engine_on
+    game_on=False
+    engine_on=False
+    exit()
+
+def game_stop_input():
+    global thread_input
+    global keyinput
+    global game_on
+    global keyout
+    keyinput=""
+    game_on=False
+    print("Press Enter To Exit")
+    while not(keyout):
+        time.sleep(0.1)
+
+def game_start_input():
+    global thread_input
+    global keyinput
+    global game_on
+    game_on=True
+    thread_input = threading.Thread(target=read_key, args=())
+    keyinput=""
+    thread_input.start()
+
+def game_load_high():
+    global game_highscore
+    try:
+        f=open(".highscore","r")
+        game_highscore=int(f.read())
+        f.close()
+    except:
+        fd=open(".highscore","w")
+        fd.write(str(game_highscore))
+        fd.close()
+
+def game_save_high(highscore):
+    global game_highscore
+    is_high=False
+    if (highscore>game_highscore):
+        f=open(".highscore","w")
+        f.write(str(highscore))
+        f.close()
+        game_highscore=highscore
+        is_high=True
+    return is_high
+
+def game_ev_snake_died():
+    global game_score
+    global scr_height
+    global scr_width
+    global game_status
+    high_result=game_save_high(game_score)
+    game_status=4
+    scr_clear(scr_width,scr_height)
+    draw_game_restartmsg(high_result)
+
+def draw_game_restartmsg(result):
+    global game_highscore
     draw_font(int(scr_width/2-5),int(scr_height/2)-1,"You LOOSE")
     draw_font(int(scr_width/2-9),int(scr_height/2),"press y to continue")
     draw_font(int(scr_width/2-7),int(scr_height/2)+1,"press n to exit")
+    draw_font(int(scr_width/2-8),int(scr_height*0.67),"===HighScore===")
+    draw_font(int(scr_width/2-int(len(str(game_highscore)+" points")/2)-1),int(scr_height*0.67)+1,str(game_highscore)+" points")
+    if result:
+        draw_font(int(scr_width/2-7),int(scr_height*0.67)+2,"NEW HIGHSCORE!")
 
 def draw_game_ready():
     global snake_x
@@ -272,6 +329,10 @@ def draw_game_ready():
     draw_font(int(scr_width*0.83),int(scr_height*0.76),"*")
     snake_x=int(scr_width*0.5)+2
     snake_y=int(scr_height*0.5)
+
+########################################################
+#                   SNAKE FUNCTION
+########################################################
 
 def snake_tail():
     global snake_x
@@ -303,9 +364,7 @@ def snake_tail():
     while find:
         count+=1
         if count>scr_width*scr_height:
-            game_status=4
-            scr_clear(scr_width,scr_height)
-            draw_game_restartmsg()
+            game_ev_snake_died()
             return "oh"
         findd=True
         if draw_getpixel(search_x-1,search_y)=="#":
@@ -379,9 +438,7 @@ def snake_update():
                 draw_pixel(snake_x,snake_y,"#")
                 snake_tail()
         else:
-            game_status=4
-            scr_clear(scr_width,scr_height)
-            draw_game_restartmsg()
+            game_ev_snake_died()
     elif direction==2:
         if snake_x>0 and not(draw_getpixel(snake_x-1,snake_y)=="#"):
             snake_x-=1
@@ -392,9 +449,7 @@ def snake_update():
                 draw_pixel(snake_x,snake_y,"#")
                 snake_tail()
         else:
-            game_status=4
-            scr_clear(scr_width,scr_height)
-            draw_game_restartmsg()
+            game_ev_snake_died()
     elif direction==3:
         if snake_y<scr_height-1 and not(draw_getpixel(snake_x,snake_y+1)=="#"):
             snake_y+=1
@@ -405,9 +460,7 @@ def snake_update():
                 draw_pixel(snake_x,snake_y,"#")
                 snake_tail()
         else:
-            game_status=4
-            scr_clear(scr_width,scr_height)
-            draw_game_restartmsg()
+            game_ev_snake_died()
     elif direction==4:
         if snake_x<scr_width-1 and not(draw_getpixel(snake_x+1,snake_y)=="#"):
             snake_x+=1
@@ -418,11 +471,54 @@ def snake_update():
                 draw_pixel(snake_x,snake_y,"#")
                 snake_tail()
         else:
-            game_status=4
-            scr_clear(scr_width,scr_height)
-            draw_game_restartmsg()
+            game_ev_snake_died()
+
+########################################################
+#                   ROOM FUNCTION
+########################################################
+
+def room_goto(room_id):
+    global room
+    room=room_id
+
+def room1():
+    global room
+    global keyinput
+    global scr_width
+    global scr_height
+    game_load_high()
+    while (room == 1):
+        scr_clear(scr_width,scr_height)
+        draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
+        draw_font(int(scr_width/2-15),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
+        draw_font(int(scr_width/2-9),int(scr_height*0.75),"Enter y to Continue")
+        draw_font(int(scr_width/2-8),int(scr_height*0.75)+1,"Enter n to Exit")
+        scr_draw(buf_scr,scr_width,scr_height)
+        Debug.Log("Title: Main Room")
+        Debuger()
+        y="y"
+        n="n"
+        inp=str(input("CMD>"))
+        Debug.Log("input: "+inp)
+        try:
+            if inp=="y":
+                room_goto(room_game)
+                Debug.Log("goto game : "+str(room))
+                scr_clear(scr_width,scr_height)
+                game_start_input()
+                cls()
+            elif inp=="n":
+                cls()
+                scr_clear(scr_width,scr_height)
+                game_exit()
+        except:
+            cls()
+            continue
+
 def room2():
     #STEP
+    global room
+    global room_main
     global buf_scr
     global game_status
     global game_drawing
@@ -475,8 +571,10 @@ def room2():
     elif game_status==4:
         draw_pause(0.5)
         if keyinput=="n" or keyinput=="N":
-            print("Press Enter To Exit...")
-            game_exit()
+            game_stop_input()
+            game_status=1
+            direction=4
+            room_goto(room_main)
         elif keyinput=="y" or keyinput=="Y":
             scr_clear(scr_width,scr_height)
             game_status=2
@@ -514,5 +612,5 @@ def main():
 
 Debug.Log("Start Main Loop...")
 
-while True:
+while engine_on:
     main()
