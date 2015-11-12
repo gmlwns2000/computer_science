@@ -211,7 +211,7 @@ def draw_option():
     global game_freq
     draw_font_ex(int(scr_width/2),int(scr_height*0.2),2,"=== Option ===")
     draw_font_ex(int(scr_width/2),int(scr_height*0.5)-2,2,"1. Reset Highscore")
-    draw_font_ex(int(scr_width/2),int(scr_height*0.5)-1,2,"Now Game Speed: "+str(game_freq))
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5)-1,2,"Now Game Speed: "+str(int(1/game_freq))+"Update Per Second")
     draw_font_ex(int(scr_width/2),int(scr_height*0.5),2,"2. Increase Game Speed")
     draw_font_ex(int(scr_width/2),int(scr_height*0.5)+1,2,"3. Decrease Game Speed")
     draw_font_ex(int(scr_width/2),int(scr_height*0.5)+2,2,"4. Set Game Window Size")
