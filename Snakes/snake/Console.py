@@ -14,6 +14,6 @@ def Write(msg):
 
 def Read():
     try:
-        return input()[0]
+        return input()[-1]
     except:
         return ""
