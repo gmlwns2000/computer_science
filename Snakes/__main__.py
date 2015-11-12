@@ -156,9 +156,135 @@ def draw_font(x,y,msg):
             pass
         pos+=1
 
+def draw_font_ex(x,y,mod,msg):
+    if mod==2:
+        x=int((x-len(msg)/2)+1)
+    elif mod==3:
+        x=int(x-len(msg)+1)
+    pos=0
+    while pos<len(msg):
+        try:
+            buf_scr[y][x+pos]=msg[pos]
+        except:
+            pass
+        pos+=1
+
 def draw_pause(length):
     global draw_pause_length
     draw_pause_length+=length
+
+def draw_game_restartmsg(result):
+    global game_highscore
+    global scr_height
+    global scr_width
+    draw_font(int(scr_width/2-5),int(scr_height/2)-1,"You LOOSE")
+    draw_font(int(scr_width/2-9),int(scr_height/2),"press y to continue")
+    draw_font(int(scr_width/2-7),int(scr_height/2)+1,"press n to exit")
+    draw_font(int(scr_width/2-8),int(scr_height*0.67),"===HighScore===")
+    draw_font(int(scr_width/2-int(len(str(game_highscore)+" points")/2)-1),int(scr_height*0.67)+1,str(game_highscore)+" points")
+    if result:
+        draw_font(int(scr_width/2-7),int(scr_height*0.67)+2,"NEW HIGHSCORE!")
+
+def draw_game_ready():
+    global snake_x
+    global snake_y
+    draw_font(int(scr_width*0.5)-4,int(scr_height*0.5)-3,"Ready...")
+    draw_font(int(scr_width*0.5)-2,int(scr_height*0.5),"#####")
+    draw_font(int(scr_width*0.83),int(scr_height*0.76),"*")
+    snake_x=int(scr_width*0.5)+2
+    snake_y=int(scr_height*0.5)
+
+def draw_main():
+    global scr_height
+    global scr_width
+    global game_highscore
+    draw_font_ex(int(scr_width/2),int(scr_height*0.2),2,"Highscore: "+str(game_highscore))
+    draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
+    draw_font(int(scr_width/2-11),int(scr_height/2.75)+1,"Welcome to Sanke World!")
+    draw_font(int(scr_width/2-10),int(scr_height*0.75),"Enter y to Continue")
+    draw_font(int(scr_width/2-9),int(scr_height*0.75)+1,"Enter o to Option")
+    draw_font(int(scr_width/2-8),int(scr_height*0.75)+2,"Enter n to Exit")
+
+def draw_option():
+    global scr_height
+    global scr_width
+    global game_freq
+    draw_font_ex(int(scr_width/2),int(scr_height*0.2),2,"=== Option ===")
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5)-2,2,"1. Reset Highscore")
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5)-1,2,"Now Game Speed: "+str(game_freq))
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5),2,"2. Increase Game Speed")
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5)+1,2,"3. Decrease Game Speed")
+    draw_font_ex(int(scr_width/2),int(scr_height*0.5)+2,2,"4. Set Game Window Size")
+    draw_font_ex(int(scr_width/2),int(scr_height*0.8),2,"Enter n key to Exit")
+
+def draw_window_wizard():
+    global scr_height
+    global scr_width
+    global buf_scr
+    complete=True
+    step=1
+    msg=""
+    while complete:
+        scr_clear(scr_width,scr_height)
+        if step==1:
+            draw_font_ex(int(scr_width)-1, int(scr_height*0.1), 3, "=== Window Setup")
+            draw_font_ex(int(scr_width*0.5),int(scr_height*0.5),2,"Enter Window Width Size.")
+            draw_font_ex(int(scr_width*0.5),int(scr_height*0.5)+1,2,"Now Size: "+str(scr_width))
+            draw_font_ex(3,int(scr_height*0.9),1,msg)
+            scr_draw(buf_scr,scr_width,scr_height)
+            inp=input("CMD>")
+            try:
+                scr_width=int(inp)
+                step=2
+                msg=""
+            except:
+                msg="Write Correct Integular Number."
+                continue
+        elif step==2:
+            draw_font_ex(int(scr_width)-1, int(scr_height*0.1), 3, "=== Window Setup")
+            draw_font_ex(int(scr_width*0.5),int(scr_height*0.5),2,"Enter Window Height Size.")
+            draw_font_ex(int(scr_width*0.5),int(scr_height*0.5)+1,2,"Now Size: "+str(scr_height))
+            draw_font_ex(3,int(scr_height*0.9),1,msg)
+            scr_draw(buf_scr,scr_width,scr_height)
+            inp=input("CMD")
+            try:
+                scr_height=int(inp)
+                step=0
+                complete=False
+                msg=""
+            except:
+                msg="Write Correct Integular Number."
+                continue
+
+def draw_reset_high():
+    global buf_scr
+    global scr_height
+    global scr_width
+    complete=True
+    msg=""
+    while complete:
+        scr_clear(buf_scr,scr_width,scr_height)
+        draw_font_ex(int(scr_width)-1, int(scr_height*0.1), 3, "=== Are You Sure?")
+        draw_font_ex(int(scr_width*0.5),int(scr_height*0.5),2,"This Task Will Reset Your Highscore!")
+        draw_font_ex(int(scr_width*0.3),int(scr_height*0.7),2,"Y:yes")
+        draw_font_ex(int(scr_width*0.6),int(scr_height*0.7),2,"N:no")
+        draw_font_ex(int(3),int(scr_height*0.9),1,msg)
+        inp=input("CMD>")
+        try:
+            if inp=="y":
+                msg=game_reset_high()
+                if msg=="":
+                    complete=False
+                else:
+                    continue
+            elif inp=="n":
+                complete=False
+            else:
+                msg="I don't know What you said."
+                continue
+        except:
+            msg="WOW bug"
+            continue
 
 ########################################################
 #                   SCREEN FUNCTION
@@ -290,6 +416,16 @@ def game_load_high():
         fd.write(str(game_highscore))
         fd.close()
 
+def game_reset_high():
+    global game_highscore
+    try:
+        game_highscore=0
+        fd=open(".highscore","w")
+        fd.write(str(game_highscore))
+        fd.close()
+    except:
+        return "Fail to Reset!"
+
 def game_save_high(highscore):
     global game_highscore
     is_high=False
@@ -310,25 +446,6 @@ def game_ev_snake_died():
     game_status=4
     scr_clear(scr_width,scr_height)
     draw_game_restartmsg(high_result)
-
-def draw_game_restartmsg(result):
-    global game_highscore
-    draw_font(int(scr_width/2-5),int(scr_height/2)-1,"You LOOSE")
-    draw_font(int(scr_width/2-9),int(scr_height/2),"press y to continue")
-    draw_font(int(scr_width/2-7),int(scr_height/2)+1,"press n to exit")
-    draw_font(int(scr_width/2-8),int(scr_height*0.67),"===HighScore===")
-    draw_font(int(scr_width/2-int(len(str(game_highscore)+" points")/2)-1),int(scr_height*0.67)+1,str(game_highscore)+" points")
-    if result:
-        draw_font(int(scr_width/2-7),int(scr_height*0.67)+2,"NEW HIGHSCORE!")
-
-def draw_game_ready():
-    global snake_x
-    global snake_y
-    draw_font(int(scr_width*0.5)-4,int(scr_height*0.5)-3,"Ready...")
-    draw_font(int(scr_width*0.5)-2,int(scr_height*0.5),"#####")
-    draw_font(int(scr_width*0.83),int(scr_height*0.76),"*")
-    snake_x=int(scr_width*0.5)+2
-    snake_y=int(scr_height*0.5)
 
 ########################################################
 #                   SNAKE FUNCTION
@@ -486,34 +603,63 @@ def room1():
     global keyinput
     global scr_width
     global scr_height
+    global game_status
+    global buf_scr
+    global game_freq
+    game_status=1
     game_load_high()
     while (room == 1):
-        scr_clear(scr_width,scr_height)
-        draw_font(int(scr_width/2-7),int(scr_height/2.75),"~ S N A K E S ~")
-        draw_font(int(scr_width/2-15),int(scr_height/2.75)+1,"Wellcome to Sanke World!")
-        draw_font(int(scr_width/2-9),int(scr_height*0.75),"Enter y to Continue")
-        draw_font(int(scr_width/2-8),int(scr_height*0.75)+1,"Enter n to Exit")
-        scr_draw(buf_scr,scr_width,scr_height)
-        Debug.Log("Title: Main Room")
-        Debuger()
-        y="y"
-        n="n"
-        inp=str(input("CMD>"))
-        Debug.Log("input: "+inp)
-        try:
-            if inp=="y":
-                room_goto(room_game)
-                Debug.Log("goto game : "+str(room))
-                scr_clear(scr_width,scr_height)
-                game_start_input()
+        if game_status==1:
+            scr_clear(scr_width,scr_height)
+            draw_main()
+            scr_draw(buf_scr,scr_width,scr_height)
+            Debug.Log("Title: Main Room")
+            Debuger()
+            y="y"
+            n="n"
+            o="o"
+            inp=input("CMD>")
+            Debug.Log("input: "+inp)
+            try:
+                if inp=="y":
+                    room_goto(room_game)
+                    game_status=1
+                    Debug.Log("goto game : "+str(room))
+                    scr_clear(scr_width,scr_height)
+                    game_start_input()
+                    cls()
+                elif inp=="n":
+                    cls()
+                    scr_clear(scr_width,scr_height)
+                    game_exit()
+                elif inp=="o":
+                    game_status=2
+                    continue
+            except:
                 cls()
-            elif inp=="n":
-                cls()
-                scr_clear(scr_width,scr_height)
-                game_exit()
-        except:
-            cls()
-            continue
+                continue
+        elif game_status==2:
+            scr_clear(scr_width, scr_height)
+            draw_option()
+            scr_draw(buf_scr, scr_width, scr_height)
+            inp=input("CMD>")
+            try:
+                if inp=="n":
+                    game_status=1
+                elif inp=="1":
+                    draw_reset_high()
+                elif inp=="2":
+                    game_freq-=0.01
+                    if game_freq<=0:
+                        game_freq=0.01
+                elif inp=="3":
+                    game_freq+=0.01
+                    if game_freq>=1.0:
+                        game_freq=0.99
+                elif inp=="4":
+                    draw_window_wizard()
+            except:
+                continue
 
 def room2():
     #STEP
