@@ -257,6 +257,7 @@ def draw_window_wizard():
                 continue
 
 def draw_reset_high():
+    time.sleep(2)
     global scr_height
     global scr_width
     global buf_scr
