@@ -62,39 +62,41 @@ def Add_User():
 def Give_Sheep():
 	global data
 	skip = True
-	skip2=True
 	while skip:
 		vilnames=list(data.keys())
 		output=""
-		#print(vilnames)
 		for i in range(0,len(vilnames)):
 			output+=" ("+str(i)+". "+vilnames[i]+") "
 		print("Villages: "+output)
-		ret=int(input("Select Number >>> "))
-		while skip2:
-			try:
-				if ret in range(0,len(vilnames)):
-					print(date[vilnames[ret]])
-					usernames=list(dict(date[vilnames[ret]]).keys())
-					print(usernames)
-					output=""
-					for i in range(0,len(usernames)):
-						output+=" ("+str(i)+". "+usernames[i]+") "
-					print("Users: "+output)
-					ret2=input("Select Number >>> ")
-					if int(ret2) in range(0,len(usernames)):
-						data[vilnames[int(ret)]][usernames[int(ret2)]].append=Make_Sheep()
-						skip=False
-						skip2=False
-			except:
-				skip=False
-				skip2=False
-				pass
+		try:
+			ret=int(input("Select Number >>> "))
+		except:
+			skip=True
+			continue
+		if not(ret in range(0,len(vilnames))):
+			continue
+		print("Village Selected: "+vilnames[ret])
+
+		vildata=dict(data[vilnames[ret]])
+		usernames=list(vildata.keys())
+
+		output=""
+		for i in range(0,len(usernames)):
+			output+=" ("+str(i)+". "+usernames[i]+") "
+		print("Users: "+output)
+		try:
+			ret2=int(input("Select Number >>> "))
+		except:
+			continue
+		print("User Selected: "+usernames[ret2])
+		data[vilnames[ret]][usernames[ret2]].append(Make_Sheep())
+		skip=False
+			
 
 
 while True:
 	try:
-		print("Welcome to Sheep Management System")
+		print("========== Welcome to Sheep Management System ==========")
 		print("1: Add Village 2: Add User 3: Give Sheep 0: Show Database")
 		ret = int(input(">>> "))
 		if ret==0:
