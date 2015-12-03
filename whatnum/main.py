@@ -78,7 +78,11 @@ while gameon:
 	print("=====================================")
 	print("=  W E L L C O M E T O G U E S S !  =")
 	print("=====================================")
-	inp=input("Do you want Start? <Y:Yes> <N:No>: ")
+	try:
+		inp=str(input("Do you want Start? <Y:Yes> <N:No>: "))
+	except:
+		say("System","Please run game in Python3")
+		exit()
 	if inp=="n" or inp=="N":
 		exit()
 	elif inp.lower()=="y":
