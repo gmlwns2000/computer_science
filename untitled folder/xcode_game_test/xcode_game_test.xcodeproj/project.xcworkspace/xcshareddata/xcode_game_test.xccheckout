@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>22E5A15A-A3CA-4708-815C-FA23A0C21FA9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D5BF38CA3951CEBB7113FEB87E0FB5A8DF3796F3</key>
+		<string>https://github.com/gmlwns2000/computer_science.git</string>
+		<key>FF7147267C7124ABEED57A0226E649D504864BFA</key>
+		<string>https://github.com/gmlwns2000/computer_science.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>untitled folder/xcode_game_test/xcode_game_test.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D5BF38CA3951CEBB7113FEB87E0FB5A8DF3796F3</key>
+		<string>../../../..</string>
+		<key>FF7147267C7124ABEED57A0226E649D504864BFA</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gmlwns2000/computer_science.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D5BF38CA3951CEBB7113FEB87E0FB5A8DF3796F3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FF7147267C7124ABEED57A0226E649D504864BFA</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D5BF38CA3951CEBB7113FEB87E0FB5A8DF3796F3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>computer_science</string>
+		</dict>
+	</array>
+</dict>
+</plist>
