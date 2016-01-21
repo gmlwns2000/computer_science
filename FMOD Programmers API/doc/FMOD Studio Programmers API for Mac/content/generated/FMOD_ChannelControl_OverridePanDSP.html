@@ -1,0 +1,43 @@
+<LINK REL="stylesheet" HREF="../static/styles.css">
+<HTML>
+<HEAD>
+<TITLE>ChannelControl::overridePanDSP</TITLE>
+</HEAD>
+<BODY TOPMARGIN="0" class="api_reference">
+<p class="header">Firelight Technologies FMOD Studio API</p>
+<H1>ChannelControl::overridePanDSP</H1>
+<P>
+<p>Replaces the built in panner unit FMOD uses per ChannelGroup and Channel, with a user selected panner.
+Can also be used to revert the panner back to the built in panner.</p>
+</P>
+<h3>C++ Syntax</h3>
+<PRE class=syntax><CODE>FMOD_RESULT ChannelControl::overridePanDSP(
+  DSP *<I>panner</I>
+);
+</CODE></PRE>
+<h2>Parameters</h2>
+<P class=dt><I>panner</I></P>
+<P class=indent>Pointer to a FMOD_DSP_TYPE_PANNER dsp unit.  Specify 0 or NULL to make FMOD use the built in panner.</P>
+<h2>Return Values</h2><P>
+If the function succeeds then the return value is <A HREF="FMOD_RESULT.html">FMOD_OK</A>.<BR>
+If the function fails then the return value will be one of the values defined in the <A HREF="FMOD_RESULT.html">FMOD_RESULT</A> enumeration.<BR>
+</P>
+<h2>Remarks</h2><P>
+<p>A panner is a unit that a channel uses to control the pan from setMixMatrix, setPan, and from parameters like 3D position.<br>
+A panner unit must support the enumerations specified by the <A HREF="FMOD_DSP_PAN.html">FMOD_DSP_PAN</A> enumeration list.<br>
+Use <A HREF="FMOD_ChannelControl_GetDSP.html">ChannelControl::getDSP</A> with <A HREF="FMOD_CHANNELCONTROL_DSP_INDEX.html">FMOD_CHANNELCONTROL_DSP_INDEX</A> enum <A HREF="FMOD_CHANNELCONTROL_DSP_INDEX.html">FMOD_CHANNELCONTROL_DSP_PANNER</A> to get access to the built in panner.<br></p>
+</P>
+<h2>See Also</h2>
+<UL type=disc>
+<LI><A HREF="FMOD_ChannelControl_GetDSP.html">ChannelControl::getDSP</A></LI>
+<LI><A HREF="FMOD_ChannelControl_AddDSP.html">ChannelControl::addDSP</A></LI>
+<LI><A HREF="FMOD_ChannelControl_RemoveDSP.html">ChannelControl::removeDSP</A></LI>
+<LI><A HREF="FMOD_ChannelControl_GetNumDSPs.html">ChannelControl::getNumDSPs</A></LI>
+<LI><A HREF="FMOD_CHANNELCONTROL_DSP_INDEX.html">FMOD_CHANNELCONTROL_DSP_INDEX</A></LI>
+<LI><A HREF="FMOD_DSP_TYPE.html">FMOD_DSP_TYPE</A></LI>
+<LI><A HREF="FMOD_DSP_PAN.html">FMOD_DSP_PAN</A></LI>
+</UL>
+<BR><BR><BR>
+<P align=center><font size=-2>Version 1.07.05 Built on Jan 7, 2016</font></P>
+<BR>
+</HTML>

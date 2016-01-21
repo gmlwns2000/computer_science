@@ -669,32 +669,30 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="328" height="368"/>
+                        <rect key="frame" x="0.0" y="0.0" width="199" height="150"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A51-A1-ytP">
-                                <rect key="frame" x="-2" y="349" width="95" height="21"/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="100" tickMarkPosition="above" sliderType="linear" id="HxW-Sq-g16"/>
-                                <connections>
-                                    <action selector="move:" target="XfG-lQ-9wD" id="jT7-rt-SQH"/>
-                                </connections>
-                            </slider>
-                            <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPh-JR-a0s">
-                                <rect key="frame" x="154" y="338" width="28" height="30"/>
-                                <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="left" allowsTickMarkValuesOnly="YES" sliderType="circular" id="vVQ-Rx-erp"/>
-                            </slider>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="t9b-ec-JJ2">
-                                <rect key="frame" x="136" y="319" width="16" height="16"/>
-                            </progressIndicator>
-                            <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="pxQ-w7-RDr">
-                                <rect key="frame" x="0.0" y="329" width="96" height="20"/>
-                            </progressIndicator>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEC-xw-O8k">
+                                <rect key="frame" x="58" y="58" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EZ5-sD-xME">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UyP-vw-bCj">
+                                <rect key="frame" x="74" y="94" width="51" height="28"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Test" id="a9Y-cw-k4A">
+                                    <font key="font" metaFont="system" size="23"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586" y="307"/>
+            <point key="canvasLocation" x="521.5" y="214"/>
         </scene>
     </scenes>
 </document>

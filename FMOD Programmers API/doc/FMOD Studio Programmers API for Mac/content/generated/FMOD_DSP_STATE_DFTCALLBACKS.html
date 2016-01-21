@@ -1,0 +1,34 @@
+<LINK REL="stylesheet" HREF="../static/styles.css">
+<HTML>
+<HEAD>
+<TITLE>FMOD_DSP_STATE_DFTCALLBACKS</TITLE>
+</HEAD>
+<BODY TOPMARGIN="0" class="api_reference">
+<p class="header">Firelight Technologies FMOD Studio API</p>
+<H1>FMOD_DSP_STATE_DFTCALLBACKS</H1>
+<P>
+<p>Struct containing DFT callbacks for plugins, to enable a plugin to perform optimized time-frequency domain conversion.</p>
+</P>
+<h3>Structure</h3>
+<PRE class=syntax><CODE>typedef struct {
+  FMOD_DSP_DFT_FFTREAL <I>fftreal</I>;
+  FMOD_DSP_DFT_IFFTREAL <I>inversefftreal</I>;
+} FMOD_DSP_STATE_DFTCALLBACKS;
+</CODE></PRE>
+<h2>Members</h2>
+<P class=dt><I>fftreal</I></P>
+<P class=indent>[r] Callback for performing an FFT on a real signal. </P>
+<P class=dt><I>inversefftreal</I></P>
+<P class=indent>[r] Callback for performing an inverse FFT to get a real signal. </P>
+<h2>Remarks</h2><P>
+<p>Members marked with [r] mean the variable is modified by FMOD and is for reading purposes only.  Do not change this value.<br>
+Members marked with [w] mean the variable can be written to.  The user can set the value.<br></p>
+</P>
+<h2>See Also</h2>
+<UL type=disc>
+<LI><A HREF="FMOD_DSP_STATE_SYSTEMCALLBACKS.html">FMOD_DSP_STATE_SYSTEMCALLBACKS</A></LI>
+</UL>
+<BR><BR><BR>
+<P align=center><font size=-2>Version 1.07.05 Built on Jan 7, 2016</font></P>
+<BR>
+</HTML>

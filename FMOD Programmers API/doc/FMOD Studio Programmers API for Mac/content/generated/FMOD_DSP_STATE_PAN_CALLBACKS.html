@@ -1,0 +1,46 @@
+<LINK REL="stylesheet" HREF="../static/styles.css">
+<HTML>
+<HEAD>
+<TITLE>FMOD_DSP_STATE_PAN_CALLBACKS</TITLE>
+</HEAD>
+<BODY TOPMARGIN="0" class="api_reference">
+<p class="header">Firelight Technologies FMOD Studio API</p>
+<H1>FMOD_DSP_STATE_PAN_CALLBACKS</H1>
+<P>
+<p>Struct containing panning helper callbacks for plugins.</p>
+</P>
+<h3>Structure</h3>
+<PRE class=syntax><CODE>typedef struct {
+  FMOD_DSP_PAN_SUM_MONO_MATRIX <I>summonomatrix</I>;
+  FMOD_DSP_PAN_SUM_STEREO_MATRIX <I>sumstereomatrix</I>;
+  FMOD_DSP_PAN_SUM_SURROUND_MATRIX <I>sumsurroundmatrix</I>;
+  FMOD_DSP_PAN_SUM_MONO_TO_SURROUND_MATRIX <I>summonotosurroundmatrix</I>;
+  FMOD_DSP_PAN_SUM_STEREO_TO_SURROUND_MATRIX <I>sumstereotosurroundmatrix</I>;
+  FMOD_DSP_PAN_3D_GET_ROLLOFF_GAIN <I>getrolloffgain</I>;
+} FMOD_DSP_STATE_PAN_CALLBACKS;
+</CODE></PRE>
+<h2>Members</h2>
+<P class=dt><I>summonomatrix</I></P>
+<P class=indent></P>
+<P class=dt><I>sumstereomatrix</I></P>
+<P class=indent></P>
+<P class=dt><I>sumsurroundmatrix</I></P>
+<P class=indent></P>
+<P class=dt><I>summonotosurroundmatrix</I></P>
+<P class=indent></P>
+<P class=dt><I>sumstereotosurroundmatrix</I></P>
+<P class=indent></P>
+<P class=dt><I>getrolloffgain</I></P>
+<P class=indent></P>
+<h2>Remarks</h2><P>
+<p>These are experimental, please contact support@fmod.org for more information.</p>
+</P>
+<h2>See Also</h2>
+<UL type=disc>
+<LI><A HREF="FMOD_DSP_STATE_SYSTEMCALLBACKS.html">FMOD_DSP_STATE_SYSTEMCALLBACKS</A></LI>
+<LI><A HREF="FMOD_DSP_PAN_SURROUND_FLAGS.html">FMOD_DSP_PAN_SURROUND_FLAGS</A></LI>
+</UL>
+<BR><BR><BR>
+<P align=center><font size=-2>Version 1.07.05 Built on Jan 7, 2016</font></P>
+<BR>
+</HTML>

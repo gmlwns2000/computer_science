@@ -1,0 +1,45 @@
+<LINK REL="stylesheet" HREF="../static/styles.css">
+<HTML>
+<HEAD>
+<TITLE>System::getChannelsReal</TITLE>
+</HEAD>
+<BODY TOPMARGIN="0" class="api_reference">
+<p class="header">Firelight Technologies FMOD Studio API</p>
+<H1>System::getChannelsReal</H1>
+<P>
+<p>Retrieves the total number of playing channels that are non-virtual.</p>
+</P>
+<h3>C++ Syntax</h3>
+<PRE class=syntax><CODE>FMOD_RESULT System::getChannelsReal(
+  int *<I>realchannels</I>
+);
+</CODE></PRE>
+<h3>C Syntax</h3>
+<PRE class=syntax><CODE>FMOD_RESULT FMOD_System_GetChannelsReal(
+  FMOD_SYSTEM *<I>system</I>,
+  int *<I>realchannels</I>
+);
+</CODE></PRE>
+<h3>C# Syntax</h3>
+<PRE class=syntax><CODE>RESULT System.getChannelsReal(
+  out int <i>channels</i>
+);
+</CODE></PRE>
+<h2>Parameters</h2>
+<dl>
+<dt>realchannels</dt>
+<dd></dd>
+</dl>
+<h2>Return Values</h2><P>
+If the function succeeds then the return value is <A HREF="FMOD_RESULT.html">FMOD_OK</A>.<BR>
+If the function fails then the return value will be one of the values defined in the <A HREF="FMOD_RESULT.html">FMOD_RESULT</A> enumeration.<BR>
+</P>
+<h2>See Also</h2>
+<UL type=disc>
+<LI><A HREF="FMOD_Channel_IsVirtual.html">Channel::isVirtual</A></LI>
+<LI><A HREF="FMOD_System_GetChannelsPlaying.html">System::getChannelsPlaying</A></LI>
+</UL>
+<BR><BR><BR>
+<P align=center><font size=-2>Version 1.07.05 Built on Jan 7, 2016</font></P>
+<BR>
+</HTML>
