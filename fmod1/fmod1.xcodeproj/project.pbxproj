@@ -10,9 +10,11 @@
 		0971FB021C51063D00BF1875 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0971FB011C51063D00BF1875 /* main.cpp */; };
 		0971FB0A1C5107BB00BF1875 /* libfmod.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0971FB081C5107BB00BF1875 /* libfmod.dylib */; };
 		0971FB0B1C5107BB00BF1875 /* libfmodL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0971FB091C5107BB00BF1875 /* libfmodL.dylib */; };
-		0971FB0D1C51080B00BF1875 /* libfmod.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0971FB081C5107BB00BF1875 /* libfmod.dylib */; };
-		0971FB0E1C51080B00BF1875 /* libfmodL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0971FB091C5107BB00BF1875 /* libfmodL.dylib */; };
-		0971FB131C510D8600BF1875 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0971FB121C510D8600BF1875 /* test.mp3 */; };
+		09E124DA1C578BF500B184D3 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E124D91C578BF500B184D3 /* libncurses.dylib */; };
+		09E124DC1C578C0000B184D3 /* libcurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E124DB1C578C0000B184D3 /* libcurses.dylib */; };
+		09F442C71C578248001A0948 /* test.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0971FB121C510D8600BF1875 /* test.mp3 */; };
+		09F442C81C57831C001A0948 /* libfmod.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0971FB081C5107BB00BF1875 /* libfmod.dylib */; };
+		09F442C91C57831C001A0948 /* libfmodL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0971FB091C5107BB00BF1875 /* libfmodL.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,8 +22,9 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 16;
 			files = (
+				09F442C71C578248001A0948 /* test.mp3 in CopyFiles */,
 				0971FB0A1C5107BB00BF1875 /* libfmod.dylib in CopyFiles */,
 				0971FB0B1C5107BB00BF1875 /* libfmodL.dylib in CopyFiles */,
 			);
@@ -36,6 +39,8 @@
 		0971FB091C5107BB00BF1875 /* libfmodL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfmodL.dylib; sourceTree = "<group>"; };
 		0971FB101C5108CA00BF1875 /* inc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = inc; sourceTree = "<group>"; };
 		0971FB121C510D8600BF1875 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
+		09E124D91C578BF500B184D3 /* libncurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libncurses.dylib; path = usr/lib/libncurses.dylib; sourceTree = SDKROOT; };
+		09E124DB1C578C0000B184D3 /* libcurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurses.dylib; path = usr/lib/libcurses.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,8 +48,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0971FB0D1C51080B00BF1875 /* libfmod.dylib in Frameworks */,
-				0971FB0E1C51080B00BF1875 /* libfmodL.dylib in Frameworks */,
+				09E124DC1C578C0000B184D3 /* libcurses.dylib in Frameworks */,
+				09E124DA1C578BF500B184D3 /* libncurses.dylib in Frameworks */,
+				09F442C81C57831C001A0948 /* libfmod.dylib in Frameworks */,
+				09F442C91C57831C001A0948 /* libfmodL.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +61,8 @@
 		0971FAF51C51063D00BF1875 = {
 			isa = PBXGroup;
 			children = (
+				09E124DB1C578C0000B184D3 /* libcurses.dylib */,
+				09E124D91C578BF500B184D3 /* libncurses.dylib */,
 				0971FB121C510D8600BF1875 /* test.mp3 */,
 				0971FB0F1C51081600BF1875 /* Libraries */,
 				0971FB001C51063D00BF1875 /* fmod1 */,
@@ -97,7 +106,7 @@
 				0971FAFA1C51063D00BF1875 /* Sources */,
 				0971FAFB1C51063D00BF1875 /* Frameworks */,
 				0971FAFC1C51063D00BF1875 /* CopyFiles */,
-				0971FB0C1C5107C800BF1875 /* Resources */,
+				09F442CA1C5787F4001A0948 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -139,16 +148,21 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		0971FB0C1C5107C800BF1875 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		09F442CA1C5787F4001A0948 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0971FB131C510D8600BF1875 /* test.mp3 in Resources */,
+			);
+			inputPaths = (
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0971FAFA1C51063D00BF1875 /* Sources */ = {
@@ -242,10 +256,7 @@
 		0971FB061C51063D00BF1875 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "@rpath/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,10 +264,7 @@
 		0971FB071C51063D00BF1875 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "@rpath/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -280,6 +288,7 @@
 				0971FB071C51063D00BF1875 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

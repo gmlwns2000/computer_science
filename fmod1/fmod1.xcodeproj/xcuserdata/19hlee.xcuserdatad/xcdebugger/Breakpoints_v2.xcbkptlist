@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "fmod1/main.cpp"
-            timestampString = "475073808.403488"
+            timestampString = "475073810.857063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "main(int argc, const char * argv[])"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "fmod1/main.cpp"
+            timestampString = "475496359.231488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "ERRCHECK_fn(FMOD_RESULT result, const char *file, int line)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "fmod1/main.cpp"
-            timestampString = "475073810.857063"
+            timestampString = "475496768.397475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "main(int argc, const char * argv[])"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "ERRCHECK_fn(FMOD_RESULT result, const char *file, int line)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

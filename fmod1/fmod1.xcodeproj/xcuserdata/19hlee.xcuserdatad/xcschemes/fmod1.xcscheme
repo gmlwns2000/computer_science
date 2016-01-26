@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0640"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -48,6 +48,33 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "osascript -e &apos;tell application &quot;Terminal&quot;&apos; -e &apos;delay 0.5&apos; -e &quot;set currentTab to do script (\&quot;$TARGET_BUILD_DIR/$PRODUCT_NAME --debug-in-terminal\&quot;)&quot; -e &apos;end tell&apos; &amp;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "0971FAFD1C51063D00BF1875"
+                     BuildableName = "fmod1"
+                     BlueprintName = "fmod1"
+                     ReferencedContainer = "container:fmod1.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "osascript -e &apos;activate application &quot;Terminal&quot;&apos; -e &apos;delay 0.5&apos; -e &apos;tell application &quot;System Events&quot;&apos; -e &apos;tell process &quot;Terminal&quot;&apos; -e &apos;keystroke &quot;w&quot; using {command down}&apos; -e &apos;end tell&apos; -e &apos;end tell&apos;">
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
@@ -60,6 +87,10 @@
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
+      <LocationScenarioReference
+         identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
+         referenceType = "1">
+      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
       shouldUseLaunchSchemeArgsEnv = "YES"

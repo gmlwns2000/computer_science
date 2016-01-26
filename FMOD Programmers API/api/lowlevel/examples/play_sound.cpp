@@ -38,7 +38,8 @@ int FMOD_Main()
 
     result = system->init(32, FMOD_INIT_NORMAL, extradriverdata);
     ERRCHECK(result);
-
+    
+    printf(Common_MediaPath("test.mp3"));
     result = system->createSound(Common_MediaPath("test.mp3"), FMOD_DEFAULT, 0, &sound1);
     ERRCHECK(result);
 

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AFA41FB71654A10E005DF8E4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA41FB61654A10E005DF8E4 /* Cocoa.framework */; };
-        BBBBBBBBBBBB000000000000 = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAA000000000000; };
+		BBBBBBBBBBBB000000000000 /* fmod_gain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAA000000000000 /* fmod_gain.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-        AAAAAAAAAAAA000000000000 = {isa = PBXFileReference; name = fmod_gain.cpp; path = ../plugins/fmod_gain.cpp; sourceTree = "<group>"; };
+		AAAAAAAAAAAA000000000000 /* fmod_gain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = fmod_gain.cpp; path = ../plugins/fmod_gain.cpp; sourceTree = "<group>"; };
 		AFA41FB61654A10E005DF8E4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		AFFF96911630FB6A00804536 /* example.dylib */ = {isa = PBXFileReference; explicitFileType = compiled.mach-o.dylib; includeInIndex = 0; path = example.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFFF96911630FB6A00804536 /* fmod_gain.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = fmod_gain.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 		AFFF96921630FB6A00804536 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFFF96911630FB6A00804536 /* example.dylib */,
+				AFFF96911630FB6A00804536 /* fmod_gain.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,25 +69,25 @@
 		AFFF96C3746D33BF00804536 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-                DDDDDDDDDDDD000000000001,
+				DDDDDDDDDDDD000000000001 /* plugins */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
 		};
-        DDDDDDDDDDDD000000000001 = {
-            isa = PBXGroup;
-            children = (
-                AAAAAAAAAAAA000000000000,
-            );
-            name = plugins;
-            sourceTree = "<group>";
-        };
+		DDDDDDDDDDDD000000000001 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				AAAAAAAAAAAA000000000000 /* fmod_gain.cpp */,
+			);
+			name = plugins;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AFFF96901630FB6A00804536 /* example */ = {
+		AFFF96901630FB6A00804536 /* fmod_gain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "example" */;
+			buildConfigurationList = AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "fmod_gain" */;
 			buildPhases = (
 				AFFF968D1630FB6A00804536 /* Sources */,
 				AFFF968E1630FB6A00804536 /* Frameworks */,
@@ -99,7 +99,8 @@
 			dependencies = (
 			);
 			name = fmod_gain;
-			productReference = AFFF96911630FB6A00804536 /* example.dylib */;
+			productName = fmod_gain;
+			productReference = AFFF96911630FB6A00804536 /* fmod_gain.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -111,7 +112,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Firelight Technologies";
 			};
-			buildConfigurationList = AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "example" */;
+			buildConfigurationList = AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "fmod_gain" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -123,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AFFF96901630FB6A00804536 /* example */,
+				AFFF96901630FB6A00804536 /* fmod_gain */,
 			);
 		};
 /* End PBXProject section */
@@ -143,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                BBBBBBBBBBBB000000000000,
+				BBBBBBBBBBBB000000000000 /* fmod_gain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,21 +186,21 @@
 		AFFF969C1630FB6A00804536 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-                COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Debug;
 		};
 		AFFF969D1630FB6A00804536 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-                COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "example" */ = {
+		AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "fmod_gain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFFF96991630FB6A00804536 /* Debug */,
@@ -208,7 +209,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "example" */ = {
+		AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "fmod_gain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFFF969C1630FB6A00804536 /* Debug */,

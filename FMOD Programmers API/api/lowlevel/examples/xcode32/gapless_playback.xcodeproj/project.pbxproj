@@ -13,7 +13,7 @@
 		AFA41FB516548BCC005DF8E4 /* common_platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = AFA41FB416548BCC005DF8E4 /* common_platform.mm */; };
 		AFA41FB71654A10E005DF8E4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA41FB61654A10E005DF8E4 /* Cocoa.framework */; };
 		AFC16065167078A800003773 /* Media in Resources */ = {isa = PBXBuildFile; fileRef = AFC160631670789200003773 /* Media */; };
-        BBBBBBBBBBBB000000000000 = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAA000000000000; };
+		BBBBBBBBBBBB000000000000 /* gapless_playback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAAAAAAAAAA000000000000 /* gapless_playback.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,7 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-        AAAAAAAAAAAA000000000000 = {isa = PBXFileReference; name = gapless_playback.cpp; path = ../gapless_playback.cpp; sourceTree = "<group>"; };
+		AAAAAAAAAAAA000000000000 /* gapless_playback.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gapless_playback.cpp; path = ../gapless_playback.cpp; sourceTree = "<group>"; };
 		AF77A84C165B0E00004D5BC2 /* libfmod.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmod.dylib; path = ../../lib/libfmod.dylib; sourceTree = "<group>"; };
 		AF77A84D165B0E00004D5BC2 /* libfmodL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodL.dylib; path = ../../lib/libfmodL.dylib; sourceTree = "<group>"; };
 		AFA41FB116548BBD005DF8E4 /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cpp; path = ../common.cpp; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 		AFA41FB416548BCC005DF8E4 /* common_platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = common_platform.mm; path = ../common_platform.mm; sourceTree = "<group>"; };
 		AFA41FB61654A10E005DF8E4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AFC160631670789200003773 /* Media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Media; path = ../media; sourceTree = "<group>"; };
-		AFFF96911630FB6A00804536 /* example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFFF96911630FB6A00804536 /* gapless_playback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gapless_playback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFF97C7163109DD00804536 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +68,7 @@
 		AFFF96921630FB6A00804536 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFFF96911630FB6A00804536 /* example.app */,
+				AFFF96911630FB6A00804536 /* gapless_playback.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				AFFF97C6163109A800804536 /* common */,
-                AAAAAAAAAAAA000000000000,
+				AAAAAAAAAAAA000000000000 /* gapless_playback.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -106,9 +106,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AFFF96901630FB6A00804536 /* example */ = {
+		AFFF96901630FB6A00804536 /* gapless_playback */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "example" */;
+			buildConfigurationList = AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "gapless_playback" */;
 			buildPhases = (
 				AFFF968D1630FB6A00804536 /* Sources */,
 				AFFF968E1630FB6A00804536 /* Frameworks */,
@@ -120,7 +120,8 @@
 			dependencies = (
 			);
 			name = gapless_playback;
-			productReference = AFFF96911630FB6A00804536 /* example.app */;
+			productName = gapless_playback;
+			productReference = AFFF96911630FB6A00804536 /* gapless_playback.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -132,7 +133,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Firelight Technologies";
 			};
-			buildConfigurationList = AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "example" */;
+			buildConfigurationList = AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "gapless_playback" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -144,7 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AFFF96901630FB6A00804536 /* example */,
+				AFFF96901630FB6A00804536 /* gapless_playback */,
 			);
 		};
 /* End PBXProject section */
@@ -154,7 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFC16065167078A800003773 /* media in Resources */,
+				AFC16065167078A800003773 /* Media in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-                BBBBBBBBBBBB000000000000,
+				BBBBBBBBBBBB000000000000 /* gapless_playback.cpp in Sources */,
 				AFA41FB216548BBD005DF8E4 /* common.cpp in Sources */,
 				AFA41FB516548BCC005DF8E4 /* common_platform.mm in Sources */,
 			);
@@ -207,21 +208,21 @@
 		AFFF969C1630FB6A00804536 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-                COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Debug;
 		};
 		AFFF969D1630FB6A00804536 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-                COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "example" */ = {
+		AFFF968B1630FB6A00804536 /* Build configuration list for PBXProject "gapless_playback" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFFF96991630FB6A00804536 /* Debug */,
@@ -230,7 +231,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "example" */ = {
+		AFFF969B1630FB6A00804536 /* Build configuration list for PBXNativeTarget "gapless_playback" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFFF969C1630FB6A00804536 /* Debug */,
